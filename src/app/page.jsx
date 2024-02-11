@@ -10,11 +10,11 @@ const spring = {
   damping: 30,
 };
 
-const texts = ["React", "Web", "Mobile", "M.E.R.N", "Full Stack"];
+const texts = ["Web", "Mobile", "M.E.R.N", "Full Stack"];
 
 const Homepage = () => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const [currentText, setCurrentText] = useState("");
+  const [currentText, setCurrentText] = useState("React");
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -27,11 +27,16 @@ const Homepage = () => {
   }, [currentTextIndex]);
 
   return (
-    <div className="h-full flex flex-col md:flex-row px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
+    <motion.div
+      className="h-full flex flex-col md:flex-row px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48"
+      initial={{ y: "-100vh", opacity: 0 }}
+      animate={{ y: "0%", opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
       {/* 3d model container */}
       <div className="h-1/2 md:h-full md:w-1/2 relative"></div>
       {/* Home text and button container */}
-      <div className="h-1/2 md:h-full md:w-1/2 flex flex-col gap-6 items-center justify-center text-center md:text-left">
+      <div className="h-1/2 md:h-full md:w-1/2 flex flex-col gap-4 md:gap-6 items-center justify-center text-center md:text-left">
         {/* Heading */}
         <h1 className="text-3xl md:text-5xl font-bold">
           Turning Ideas into Reality as{" "}
@@ -86,7 +91,7 @@ const Homepage = () => {
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
