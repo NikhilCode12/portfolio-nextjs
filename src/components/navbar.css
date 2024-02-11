@@ -1,0 +1,10 @@
+.nav-links:hover {
+  transition: all 0.2s ease-in-out;
+  transform: translateY(4px);
+  scale: 1.1;
+}
+
+.social-links:hover {
+  transition: scale 0.2s ease-in-out;
+  scale: 1.15;
+}
