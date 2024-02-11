@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { FaCloudDownloadAlt, FaHandshake } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const spring = {
@@ -9,7 +10,22 @@ const spring = {
   damping: 30,
 };
 
+const texts = ["React", "Web", "Mobile", "M.E.R.N", "Full Stack"];
+
 const Homepage = () => {
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [currentText, setCurrentText] = useState("");
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const text = texts[currentTextIndex];
+      setCurrentText(text);
+      setCurrentTextIndex((currentTextIndex + 1) % texts.length);
+    }, 3000);
+
+    return () => clearInterval(intervalId);
+  }, [currentTextIndex]);
+
   return (
     <div className="h-full flex flex-col md:flex-row px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
       {/* 3d model container */}
@@ -18,7 +34,17 @@ const Homepage = () => {
       <div className="h-1/2 md:h-full md:w-1/2 flex flex-col gap-6 items-center justify-center text-center md:text-left">
         {/* Heading */}
         <h1 className="text-3xl md:text-5xl font-bold">
-          Turning Ideas into Reality.
+          Turning Ideas into Reality as{" "}
+          <motion.span
+            className="text-blue-400"
+            key={texts[currentTextIndex]}
+            initial={{ opacity: 0.5 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.85 }}
+          >
+            {currentText}
+          </motion.span>
+          {" Developer"}
         </h1>
         {/* Subheading */}
         <p className="text-sm md:text-lg text-blue-300">
