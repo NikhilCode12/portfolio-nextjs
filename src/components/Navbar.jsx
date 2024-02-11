@@ -7,8 +7,10 @@ import {
   FaGithub,
   FaLinkedin,
   FaTwitter,
+  FaTimes,
 } from "react-icons/fa";
 import "./navbar.css";
+import { motion } from "framer-motion";
 
 const menuBarItems = [
   { name: "Home", link: "/" },
@@ -20,9 +22,35 @@ const menuBarItems = [
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [activeLink, setActiveLink] = useState("Home");
+  const [crossIcon, setCrossIcon] = useState(false);
 
   const handleMenuButtonClick = () => {
+    setCrossIcon((prev) => !prev);
     setShowMenu((prev) => !prev);
+  };
+
+  const menuItemsDivVariants = {
+    hidden: {
+      x: "-100vw",
+    },
+    visible: {
+      x: 0,
+      transition: {
+        when: "beforeChildren",
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const menuListItemsVariants = {
+    hidden: {
+      x: -10,
+      opacity: 0,
+    },
+    visible: {
+      x: 0,
+      opacity: 1,
+    },
   };
 
   return (
@@ -39,7 +67,7 @@ const Navbar = () => {
         </Link>
       </div>
       {/* Links */}
-      <div className="hidden md:flex items-center md:gap-4 lg:gap-10 w-1/3 justify-center font-medium">
+      <div className="hidden md:flex items-center md:gap-10 lg:gap-10 w-1/3 justify-center font-medium">
         {menuBarItems.map((item) => {
           return (
             <Link
@@ -47,8 +75,8 @@ const Navbar = () => {
               href={item.link}
               className={`nav-links hover:text-blue-300 active:text-blue-500 ${
                 activeLink === item.name
-                  ? "text-blue-300 scale-[1.1] translate-y-[4px]"
-                  : null
+                  ? "text-blue-300 scale-[1.1] translate-y-[4px] active-link-nav"
+                  : undefined
               }`}
               onClick={() => setActiveLink(item.name)}
             >
@@ -102,26 +130,48 @@ const Navbar = () => {
       {/* Responsive Nav Menu*/}
       <div className="flex items-center md:hidden">
         {/* Menu button */}
-        <button
+        <motion.button
           className="z-50 relative bg-slate-700 rounded-md p-1"
+          whileTap={{ scale: 0.9 }}
           onClick={handleMenuButtonClick}
         >
-          <FaBars
-            color="rgba(96,165,250,1)"
-            className="text-2xl rounded-full"
-          />
-        </button>
+          {crossIcon ? (
+            <FaTimes
+              color="rgba(96,165,250,1)"
+              className="text-2xl rounded-full"
+            />
+          ) : (
+            <FaBars
+              color="rgba(96,165,250,1)"
+              className="text-2xl rounded-full"
+            />
+          )}
+        </motion.button>
         {/* Menu List */}
         {showMenu && (
-          <div className="flex flex-col items-center absolute top-0 left-0 w-screen h-screen bg-slate-900 text-blue-400 justify-center gap-8 text-3xl font-medium">
+          <motion.div
+            variants={menuItemsDivVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col items-center absolute top-0 left-0 w-screen h-screen text-blue-400 justify-center gap-8 text-2xl font-medium z-40 bg-gradient-to-b from-slate-800 to-slate-950"
+          >
             {menuBarItems.map((item) => {
               return (
-                <Link key={item.name} href={item.link}>
-                  {item.name}
-                </Link>
+                <motion.div key={item.name} variants={menuListItemsVariants}>
+                  <Link
+                    href={item.link}
+                    onClick={() => {
+                      setShowMenu(false);
+                      setCrossIcon(false);
+                    }}
+                    className="nav-links"
+                  >
+                    {item.name}
+                  </Link>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         )}
       </div>
     </nav>
