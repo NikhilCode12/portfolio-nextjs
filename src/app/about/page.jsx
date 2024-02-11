@@ -4,7 +4,7 @@ const About = () => {
   return (
     <div>
       <h1>About</h1>
-      <p>I'm a full stack developer</p>
+      <p>{"I'm a full stack developer"}</p>
     </div>
   );
 };
