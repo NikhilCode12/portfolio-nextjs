@@ -29,7 +29,7 @@ const Homepage = () => {
   return (
     <motion.div
       className="h-full flex flex-col md:flex-row px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48"
-      initial={{ y: "-100vh", opacity: 0 }}
+      initial={{ y: "-200vh", opacity: 0 }}
       animate={{ y: "0%", opacity: 1 }}
       transition={{ duration: 1 }}
     >
