@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FaCloudDownloadAlt, FaHandshake } from "react-icons/fa";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import AvatarContainer from "../components/AvatarContainer";
 
 const spring = {
   type: "spring",
@@ -27,14 +28,11 @@ const Homepage = () => {
   }, [currentTextIndex]);
 
   return (
-    <motion.div
-      className="h-full flex flex-col md:flex-row px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48"
-      initial={{ y: "-200vh", opacity: 0 }}
-      animate={{ y: "0%", opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
+    <motion.div className="h-full flex flex-col md:flex-row px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
       {/* 3d model container */}
-      <div className="h-1/2 md:h-full md:w-1/2 relative"></div>
+      <div className="h-1/2 md:h-full md:w-1/2">
+        <AvatarContainer />
+      </div>
       {/* Home text and button container */}
       <div className="h-1/2 md:h-full md:w-1/2 flex flex-col gap-4 md:gap-6 items-center justify-center text-center md:text-left">
         {/* Heading */}
