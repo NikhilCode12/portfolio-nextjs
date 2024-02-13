@@ -22,9 +22,10 @@ const TransitionProvider = ({ children }) => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
         >
-          {pathName === "/"
-            ? "Home"
-            : pathName.slice(1).charAt(0).toUpperCase() + pathName.slice(2)}
+          {pathName === "/" && "Welcome, my friend!"}
+          {pathName === "/about" && "It's me, Nikhil!"}
+          {pathName === "/contact" && "Let's Connect!"}
+          {pathName === "/projects" && "Hire me!"}
         </motion.div>
         <motion.div
           className="hidden md:flex h-screen w-screen fixed bg-slate-900 bottom-0 rounded-t-[25px] z-40"
