@@ -16,6 +16,7 @@
   height: 3px;
   bottom: -5px;
   left: 0;
-  border-radius: 50%;
+  border-radius: 100%;
   background-color: rgb(88, 170, 197);
+  opacity: 0.95;
 }

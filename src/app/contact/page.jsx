@@ -1,14 +1,17 @@
+"use client";
 import React from "react";
+import { motion } from "framer-motion";
 
 const Contact = () => {
   return (
-    <div>
-      <h1>Contact</h1>
-      <p>
-        You can reach me at
-        <a href="mailto:sharmanikhil12jv@gmail.com">Mail me</a>
-      </p>
-    </div>
+    <motion.div
+      className="h-full"
+      initial={{ y: "-200vh" }}
+      animate={{ y: "0%" }}
+      transition={{ duration: 1 }}
+    >
+      Contact
+    </motion.div>
   );
 };
 

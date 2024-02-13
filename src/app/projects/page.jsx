@@ -1,12 +1,18 @@
+"use client";
 import React from "react";
+import { motion } from "framer-motion";
 
-const Portfolio = () => {
+const Projects = () => {
   return (
-    <div>
-      <h1>Portfolio</h1>
-      <p>Here are some of my projects</p>
-    </div>
+    <motion.div
+      className="h-full"
+      initial={{ y: "-200vh" }}
+      animate={{ y: "0%" }}
+      transition={{ duration: 1 }}
+    >
+      Projects
+    </motion.div>
   );
 };
 
-export default Portfolio;
+export default Projects;

@@ -11,7 +11,7 @@ import {
 } from "react-icons/fa";
 import "./navbar.css";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const menuBarItems = [
   { name: "Home", link: "/" },
@@ -21,7 +21,11 @@ const menuBarItems = [
 ];
 
 const Navbar = () => {
-  const router = useRouter();
+  const currentPath = usePathname();
+  const currentPathName =
+    currentPath === "/"
+      ? "Home"
+      : currentPath.slice(1).charAt(0).toUpperCase() + currentPath.slice(2);
   const [showMenu, setShowMenu] = useState(false);
   const [activeLink, setActiveLink] = useState("Home");
   const [crossIcon, setCrossIcon] = useState(false);
@@ -56,10 +60,8 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    const pathName = router.pathname;
-    const activeLink = menuBarItems.find((item) => item.link === pathName);
-    if (activeLink) setActiveLink(activeLink.name);
-  }, [router.pathname]);
+    setActiveLink(currentPathName);
+  }, [currentPathName]);
 
   return (
     <nav className="h-full flex items-center justify-between px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
