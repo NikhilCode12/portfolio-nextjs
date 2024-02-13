@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   FaBars,
@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import "./navbar.css";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const menuBarItems = [
   { name: "Home", link: "/" },
@@ -20,6 +21,7 @@ const menuBarItems = [
 ];
 
 const Navbar = () => {
+  const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
   const [activeLink, setActiveLink] = useState("Home");
   const [crossIcon, setCrossIcon] = useState(false);
@@ -53,6 +55,12 @@ const Navbar = () => {
     },
   };
 
+  useEffect(() => {
+    const pathName = router.pathname;
+    const activeLink = menuBarItems.find((item) => item.link === pathName);
+    if (activeLink) setActiveLink(activeLink.name);
+  }, [router.pathname]);
+
   return (
     <nav className="h-full flex items-center justify-between px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
       {/* bigger screens like tablet, laptop and desktop... */}
@@ -73,10 +81,11 @@ const Navbar = () => {
             <Link
               key={item.name}
               href={item.link}
-              className={`nav-links hover:text-blue-300 active:text-blue-500 ${
+              className={`nav-links hover:text-blue-300 active:text-blue-500 
+              ${
                 activeLink === item.name
                   ? "text-blue-300 scale-[1.1] translate-y-[4px] active-link-nav"
-                  : undefined
+                  : ""
               }`}
               onClick={() => setActiveLink(item.name)}
             >
