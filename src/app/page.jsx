@@ -37,7 +37,7 @@ const Homepage = () => {
       <div className="h-full flex flex-col md:flex-row px-4 sm:px-8 md:px-12 lg:px-20 xl:px-48">
         {/* 3d model container */}
         <div className="h-1/2 md:h-full md:w-1/2">
-          {/* <AvatarContainer /> */}
+          <AvatarContainer />
         </div>
         {/* Home text and button container */}
         <div className="h-1/2 md:h-full md:w-1/2 flex flex-col gap-4 md:gap-6 items-center justify-center text-center md:text-left">
